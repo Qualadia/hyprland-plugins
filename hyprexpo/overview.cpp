@@ -29,7 +29,8 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
     static auto* const* PGAPS    = (Hyprlang::INT* const*)HyprlandAPI::getConfigValue(PHANDLE, "plugin:hyprexpo:gap_size")->getDataStaticPtr();
     static auto* const* PCOL     = (Hyprlang::INT* const*)HyprlandAPI::getConfigValue(PHANDLE, "plugin:hyprexpo:bg_col")->getDataStaticPtr();
     static auto const*  PMETHOD  = (Hyprlang::STRING const*)HyprlandAPI::getConfigValue(PHANDLE, "plugin:hyprexpo:workspace_method")->getDataStaticPtr();
-
+    static auto const*  PHOVER   = (Hyprlang::INT* const*)HyprlandAPI::getConfigValue(PHANDLE, "plugin:hyprexpo:hover_workspace_selection")->getDataStaticPtr();
+        
     SIDE_LENGTH = **PCOLUMNS;
     GAP_WIDTH   = **PGAPS;
     BG_COLOR    = **PCOL;
@@ -184,6 +185,15 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
 
         info.cancelled    = true;
         lastMousePosLocal = g_pInputManager->getMouseCoordsInternal() - pMonitor->vecPosition;
+
+        // if hover selection active, also update closeOnId
+        if (**PHOVER) {
+            // get tile x,y
+            int x = lastMousePosLocal.x / pMonitor->vecSize.x * SIDE_LENGTH;
+            int y = lastMousePosLocal.y / pMonitor->vecSize.y * SIDE_LENGTH;
+
+            closeOnID = x + y * SIDE_LENGTH;            
+        }
     };
 
     auto onCursorSelect = [this](void* self, SCallbackInfo& info, std::any param) {
