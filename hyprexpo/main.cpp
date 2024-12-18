@@ -223,7 +223,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprexpo:gesture_positive", Hyprlang::INT{1});
     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprexpo:gesture_fingers", Hyprlang::INT{4});
 
-    HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprexpo:hover_workspace_selection", Hyprland::INT{1});
+    HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprexpo:hover_workspace_selection", Hyprlang::INT{1});
 
     HyprlandAPI::reloadConfig();
 
