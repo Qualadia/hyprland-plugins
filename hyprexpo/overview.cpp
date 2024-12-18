@@ -34,6 +34,7 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
     SIDE_LENGTH = **PCOLUMNS;
     GAP_WIDTH   = **PGAPS;
     BG_COLOR    = **PCOL;
+    HOVER       = **PHOVER;
 
     // process the method
     bool     methodCenter  = true;
@@ -187,12 +188,12 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
         lastMousePosLocal = g_pInputManager->getMouseCoordsInternal() - pMonitor->vecPosition;
 
         // if hover selection active, also update closeOnId
-        if (**PHOVER) {
+        if (HOVER) {
             // get tile x,y
             int x = lastMousePosLocal.x / pMonitor->vecSize.x * SIDE_LENGTH;
             int y = lastMousePosLocal.y / pMonitor->vecSize.y * SIDE_LENGTH;
-
-            closeOnID = x + y * SIDE_LENGTH;            
+            
+            closeOnID = x + y * SIDE_LENGTH;
         }
     };
 

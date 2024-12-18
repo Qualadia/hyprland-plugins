@@ -44,8 +44,9 @@ class COverview {
     int        SIDE_LENGTH = 3;
     int        GAP_WIDTH   = 5;
     CHyprColor BG_COLOR    = CHyprColor{0.1, 0.1, 0.1, 1.0};
+    bool       HOVER       = false;
 
-    bool       damageDirty = false;
+    bool       damageDirty = true;
 
     struct SWorkspaceImage {
         CFramebuffer fb;
